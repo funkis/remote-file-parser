@@ -11,7 +11,8 @@ router.post('/', function (req, res) {
   let confirmation = {
     file : req.body.file
   }
-  textract.fromUrl(req.body.file, ( error, text ) => {
+  // see language codes at https://github.com/tesseract-ocr/tesseract/wiki/Data-Files 
+  textract.fromUrl(req.body.file, { tesseract : { lang: "swe"} }, ( error, text ) => {
     console.log(error);
     console.log(text);
     confirmation.text = text;
